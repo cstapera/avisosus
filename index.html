@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <!-- Twitter -->
+    <meta property="twitter:description" content>
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content>
+    <meta property="twitter:image" content>
+    <title>Confirmação SUS</title>
+    <meta name="title" content>
+    <meta name="description" content>
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:description" content>
+    <meta property="og:title" content>
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="GitHub">
+    <meta property="og:image" content>
+    <base target="_top">
+  </head>
+  <body>
+    <h1 id="result"> AGUARDE </h1>
+    <script>
+      const urlConfirm = "https://script.google.com/macros/s/AKfycbzlJhUXMZKSYx6kplTBv6RocU4p1SzUIIQR5-ctFtTpoqx3XK7GLWh0zIxsMQOBmcEXDg/exec";
+      setTimeout(() => {
+        fetch(`${urlConfirm}${window.location.search}`)
+          .then((data)=>data.json())
+          .then((data)=>{
+            let result = "Falhou";
+            switch(data.status) {
+              case "success":
+                result = "Confirmado";
+                break;
+              case "already":
+                result = "Já confirmado";
+                break;
+              case "invalid":
+                result = "Token Inválido";
+                break;
+            }
+            document.querySelector("#result").innerText = result;
+          });
+      }, 1000);
+    </script>
+  </body>
+</html>
